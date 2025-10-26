@@ -1,70 +1,179 @@
-# Getting Started with Create React App
+# 🍃 BrewBuddy - AI-Powered Tea Brewing Guide
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React application that provides personalized tea brewing recommendations using AI. Built as a learning experiment and hosted publicly on GitHub.
 
-## Available Scripts
+## 🌟 Features
 
-In the project directory, you can run:
+- **AI-Powered Recommendations**: Get personalized tea brewing advice using OpenAI's GPT-4
+- **Interactive Chat Interface**: Clean, responsive chat UI with real-time messaging
+- **Comprehensive Tea Knowledge**: Expert guidance on water temperature, steeping times, and brewing techniques
+- **Markdown Support**: Rich formatting for detailed brewing instructions
+- **Dual Deployment**: Supports both Node.js development server and PHP production deployment
+- **Modern UI**: Beautiful gradient design with Tailwind CSS
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+- **React 19.2.0** - Modern React with latest features
+- **Tailwind CSS** - Utility-first CSS framework
+- **Lucide React** - Beautiful icon library
+- **React Markdown** - Markdown rendering with GitHub Flavored Markdown support
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- **Node.js + Express** - Development server with API proxy
+- **PHP** - Production deployment proxy for cPanel hosting
+- **OpenAI API** - GPT-4 integration for tea expertise
 
-### `npm test`
+### Development Tools
+- **Concurrently** - Run multiple npm scripts simultaneously
+- **PostCSS + Autoprefixer** - CSS processing
+- **PM2** - Process management for production
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📦 Installation & Setup
 
-### `npm run build`
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- OpenAI API key
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/MegladonCodes/brewbuddy.git
+cd brew-buddy
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Environment Setup
+Create a `.env` file in the root directory:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+NODE_ENV=development
+PORT=5000
+```
 
-### `npm run eject`
+### 4. Development Server
+```bash
+# Start both frontend and backend concurrently
+npm run dev
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Or start them separately:
+npm start          # Frontend only (port 3000)
+npm run server     # Backend only (port 5000)
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. Production Build
+```bash
+npm run build
+npm run start:prod
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🏗️ Project Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+brew-buddy/
+├── public/                 # Static assets
+│   ├── index.html         # Main HTML template
+│   ├── manifest.json      # PWA manifest
+│   └── teacup.png         # App icon
+├── src/
+│   ├── App.jsx            # Main React component
+│   ├── index.js           # React entry point
+│   ├── index.css          # Global styles with Tailwind
+│   └── server.js          # Express development server
+├── build/                 # Production build output
+├── ecosystem.config.js    # PM2 configuration
+├── tailwind.config.js     # Tailwind configuration
+└── package.json           # Dependencies and scripts
+```
 
-## Learn More
+## 🔧 Configuration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Tailwind CSS
+The app uses Tailwind CSS for styling. Configuration can be found in `tailwind.config.js`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### PM2 Configuration
+Production process management is configured in `ecosystem.config.js`:
+```javascript
+module.exports = {
+  apps: [{
+    name: 'brew-buddy',
+    script: 'src/server.js',
+    instances: 1,
+    exec_mode: 'cluster',
+    env: {
+      NODE_ENV: 'production',
+      PORT: 5000
+    }
+  }]
+};
+```
 
-### Code Splitting
+## 🌐 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Development
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:5000/api/chat`
 
-### Analyzing the Bundle Size
+## 💡 Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Start a Conversation**: The AI greets you with a welcome message
+2. **Describe Your Tea**: Tell the AI about your tea type, preferences, or ask for recommendations
+3. **Get Expert Advice**: Receive detailed brewing instructions including:
+   - Optimal water temperature (Fahrenheit and Celsius)
+   - Recommended steeping time
+   - Tea-to-water ratios
+   - Water quality tips
+   - Flavor enhancement techniques
+   - Common mistakes to avoid
 
-### Making a Progressive Web App
+### Example Queries
+- "I have a green tea, I like bold flavors"
+- "What's the best way to brew oolong tea?"
+- "How do I make the perfect cup of Earl Grey?"
+- "I'm new to tea, what should I start with?"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🤖 AI System Prompt
 
-### Advanced Configuration
+The application uses a specialized system prompt that positions the AI as an expert tea brewing specialist, ensuring responses include:
+- Tea type identification and characteristics
+- Optimal water temperatures
+- Steeping times
+- Tea amounts
+- Water quality recommendations
+- Flavor enhancement tips
+- Common brewing mistakes to avoid
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🧪 Learning Objectives
 
-### Deployment
+This project demonstrates:
+- Modern React development with hooks
+- AI API integration
+- Responsive UI design with Tailwind CSS
+- Dual deployment strategies (Node.js + PHP)
+- Real-time chat interfaces
+- Markdown rendering
+- Environment-based configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📝 License
 
-### `npm run build` fails to minify
+This project is open source and available under the [MIT License](LICENSE).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🤝 Contributing
+
+This is a learning project, but contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
+- Share your own tea brewing tips
+
+## 📞 Contact
+
+Created as a learning experiment. Feel free to reach out with questions or feedback!
+
+---
+
+*Happy brewing! 🍃*

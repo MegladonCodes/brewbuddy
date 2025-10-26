@@ -4,8 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-.php
+
+# Sensitive files (never commit these)
+api.php
 .htaccess
+*.php
 
 # testing
 /coverage
